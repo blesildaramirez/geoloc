@@ -16,7 +16,52 @@
   padding: 0.2em 0;
 }
 
+.list-group-item > a {
+  padding: 2px;
+}
+
+li .list-button {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* Loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #777777;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* End Loader*/
+
 /* inject:less */
-@import 'admin/admin.less';
-@import 'main/main.less';
+@import 'admin/admin';
+@import 'main/main';
+@import 'store/store-form/store-form';
+@import 'store/store-list/store-list';
+@import 'store/store-show/store-show';
+@import '../components/footer/footer';
+@import '../components/modal/modal';
+@import '../components/oauth-buttons/oauth-buttons';
 /* endinject */

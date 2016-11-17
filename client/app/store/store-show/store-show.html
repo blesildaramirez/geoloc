@@ -1,0 +1,31 @@
+<div id="loader" ng-show="$ctrl.fetching.store"></div>
+<div class="container" ng-if="!$ctrl.fetching.store">
+  <div class="row">
+    <div class="page-header">
+      <h3>Store</h3>
+    </div>
+    <div class="col-lg-12 col-md-6">
+      <dl class="store-info">
+        <dt>Name</dt>
+        <dd ng-bind="$ctrl.store.name"></dd>
+        <dt>Address</dt>
+        <dd ng-bind="$ctrl.store.address"></dd>
+        <dt>Date Created</dt>
+        <dd ng-bind="$ctrl.store.createdAt | date: medium"></dd>
+        <dt>Map</dt>
+        <dd ng-if="$ctrl.center">
+          <leaflet lf-center="$ctrl.center" height="280px"></leaflet>
+        </dd>
+      </dl>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="pull-left">
+            <button type="button" class="btn btn-default btn-sm" ui-sref="store-list">Back</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <hr>
+</div>

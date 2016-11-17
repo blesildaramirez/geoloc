@@ -1,0 +1,42 @@
+<div id="loader" ng-show="$ctrl.fetching.store"></div>
+<div class="container" ng-if="!$ctrl.fetching.store">
+  <div class="row">
+    <div class="page-header">
+      <h3 ng-bind="($ctrl.store._id ? 'Update' : 'New') + ' Store'"></h3>
+    </div>
+    <div class="col-lg-12 col-md-6">
+      <form class="form" name="form" ng-submit="$ctrl.save(form)" novalidate>
+        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && $ctrl.submitted,
+                                            'has-error': form.name.$invalid && $ctrl.submitted }">
+          <label>Name</label>
+          <input type="text" name="name" class="form-control" ng-model="$ctrl.store.name"
+                 required/>
+          <p class="help-block" ng-show="form.name.$error.required && $ctrl.submitted">
+            A name is required
+          </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.address.$valid && $ctrl.submitted,
+                                'has-error': (form.address.$invalid || $ctrl.errors.geoLocation) && $ctrl.submitted }">
+          <label>Address</label>
+          <input type="text" name="address" class="form-control" ng-model="$ctrl.geo"
+                g-places-autocomplete required ng-change="$ctrl.invalidateAddress()" autocomplete="off"/>
+          <p class="help-block" ng-show="(form.address.$error.required || $ctrl.errors.geoLocation) && $ctrl.submitted">
+            An address is required
+          </p>
+          <div class="panel" ng-if="$ctrl.center">
+            <leaflet lf-center="$ctrl.center" height="280px"></leaflet>
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-inverse btn-lg" type="submit">
+            Save
+          </button>
+          <button class="btn btn-inverse btn-lg" ui-sref="store-list">
+            Back
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr>
+</div>

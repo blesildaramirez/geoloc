@@ -30,8 +30,8 @@ class StoreFormComponent {
           this.store = res.data;
           this.geo = this.store.address;
           this.center = {
-            lat: this.store.geoLocation.coordinates[0],
-            lng: this.store.geoLocation.coordinates[1],
+            lat: this.store.geoLocation.coordinates[1],
+            lng: this.store.geoLocation.coordinates[0],
             zoom: 12
           };
         })
@@ -58,7 +58,7 @@ class StoreFormComponent {
         name: this.store.name,
         address: this.store.address,
         geoLocation: {
-          coordinates: [this.center.lat, this.center.lng]
+          coordinates: [this.center.lng, this.center.lat]
         }
       };
       if (this.store._id) {

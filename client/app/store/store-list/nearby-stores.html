@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h3 class="modal-title">Nearby Stores<i class="fa fa-spin fa-spinner pull-right" ng-show="$ctrl.fetching.location"></i></h3>
+</div>
+<div class="modal-body">
+  <div class="no-padding">
+    <div class="panel" ng-if="$ctrl.center && !$ctrl.fetching.location">
+      <leaflet lf-center="$ctrl.center" markers="$ctrl.markers" height="480px"></leaflet>
+    </div>
+    <div class="alert alert-danger" role="alert" ng-show="!$ctrl.center && !$ctrl.fetching.location">
+      Please allow this website to access your location.
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" type="button" ng-click="$ctrl.cancel()">Close</button>
+</div>

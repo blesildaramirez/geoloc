@@ -86,6 +86,41 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
+// Gets a list of Nearby Stores
+export function nearby(req, res) {
+  if (!req.query.lat || !req.query.lng) {
+    return handleError(res, 400);
+  }
+
+  var params = {
+    isActive: true,
+    geoLocation: {
+      $nearSphere: {
+        $geometry: {
+          type : "Point",
+          coordinates : [ parseFloat(req.query.lng), parseFloat(req.query.lat) ]
+        },
+        $minDistance: 10,
+        $maxDistance: 10000
+      }
+    }
+  };
+
+  return Store.find(params).exec()
+    .then(stores => {
+      var result = {
+        data: stores,
+        count: stores.length
+      }
+      return Store.find(params).count().exec().then(count => {
+        result.count = count;
+        return result;
+      });
+    })
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 // Gets a single Store from the DB
 export function show(req, res) {
   return Store.findById(req.params.id).exec()

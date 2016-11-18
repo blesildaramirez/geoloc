@@ -6,6 +6,9 @@
       <button class="btn btn-primary pull-right" ui-sref="store-form" ng-if="$ctrl.isAdmin()">
         <i class="fa fa-plus"></i> Add
       </button>
+      <button class="btn btn-primary pull-right" ng-click="$ctrl.getNearby()" ng-if="!$ctrl.isAdmin()">
+        <i class="fa fa-map-marker"></i> Nearby
+      </button>
     </h3>
   </div>
   <ul class="list-group user-list" ng-if="$ctrl.stores.length > 0">

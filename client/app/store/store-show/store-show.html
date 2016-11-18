@@ -4,7 +4,7 @@
     <div class="page-header">
       <h3>Store</h3>
     </div>
-    <div class="col-lg-12 col-md-6">
+    <div class="col-xs-12">
       <dl class="store-info">
         <dt>Name</dt>
         <dd ng-bind="$ctrl.store.name"></dd>
@@ -14,12 +14,19 @@
         <dd ng-bind="$ctrl.store.createdAt | date: medium"></dd>
         <dt>Map</dt>
         <dd ng-if="$ctrl.center">
-          <leaflet lf-center="$ctrl.center" height="280px"></leaflet>
+          <leaflet lf-center="$ctrl.center" markers="$ctrl.markers" paths="$ctrl.path" height="480px" width="680px"></leaflet>
         </dd>
       </dl>
       <div class="row">
         <div class="col-xs-12">
-          <div class="pull-left">
+          <div class="pull-left form-inline no-padding">
+            <div class="form-group" ng-if="!$ctrl.isAdmin()">
+              <label>Start:</label>
+              <input type="text" class="form-control" ng-model="$ctrl.geo"
+                    g-places-autocomplete required autocomplete="off"/>
+            </div>
+            <button type="button" class="btn btn-info btn-sm" ng-disabled="!$ctrl.selectedLoc.lat || !$ctrl.selectedLoc.lng || !$ctrl.geo" ng-click="$ctrl.showInputDirection()" ng-if="!$ctrl.isAdmin()">Show Direction</button>
+            <button type="button" class="btn btn-success btn-sm" ng-click="$ctrl.showDirection()" ng-if="!$ctrl.isAdmin()">Show Direction From Current Location</button>
             <button type="button" class="btn btn-default btn-sm" ui-sref="store-list">Back</button>
           </div>
         </div>

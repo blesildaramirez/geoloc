@@ -12,6 +12,6 @@ var StoreSchema = new mongoose.Schema({
   isActive: { type: Boolean, default: true }
 }, {
   timestamps: true
-});
+}).index({ geoLocation: '2dsphere' });
 
 export default mongoose.model('Store', StoreSchema);

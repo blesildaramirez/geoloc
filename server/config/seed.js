@@ -4,6 +4,7 @@
  */
 
 'use strict';
+import Store from '../api/store/store.model';
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
 
@@ -56,4 +57,9 @@ User.find({}).remove()
     .then(() => {
       console.log('finished populating users');
     });
+  });
+
+Store.find({}).remove()
+  .then(() => {
+    console.log('finished removing stores');
   });

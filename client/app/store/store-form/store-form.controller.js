@@ -12,13 +12,22 @@ class StoreFormComponent {
     this.geo = '';
     this.fetching = {};
     this.errors = {};
+    this.markers = {};
     this.center = null;
     this.api = '/api/stores';
+    this.autocompleteOptions = {
+      componentRestrictions: { country: 'ph' }
+    };
 
     this.$scope.$on('g-places-autocomplete:select',(event) => {
       this.center.lat = event.targetScope.model.geometry.location.lat();
       this.center.lng = event.targetScope.model.geometry.location.lng();
       this.store.address = event.targetScope.model.formatted_address;
+      this.markers = [{
+        lat: this.center.lat,
+        lng: this.center.lng,
+        draggable: false
+      }];
     });
   }
 

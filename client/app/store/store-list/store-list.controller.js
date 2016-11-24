@@ -86,8 +86,7 @@ angular.module('geolocApp')
                   draggable: false,
                   message: store.name
                 });
-              })
-
+              });
               this.total = response.data.count;
             })
             .finally(() => this.fetching.stores = false);

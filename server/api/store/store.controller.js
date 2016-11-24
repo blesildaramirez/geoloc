@@ -101,7 +101,7 @@ export function nearby(req, res) {
           coordinates : [ parseFloat(req.query.lng), parseFloat(req.query.lat) ]
         },
         $minDistance: 10,
-        $maxDistance: 10000
+        $maxDistance: 1000
       }
     }
   };

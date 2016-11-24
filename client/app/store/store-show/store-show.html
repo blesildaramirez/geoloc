@@ -17,21 +17,31 @@
           <leaflet lf-center="$ctrl.center" markers="$ctrl.markers" paths="$ctrl.path" height="480px" width="680px"></leaflet>
         </dd>
       </dl>
+      <div class="col-xs-12 no-padding" ng-if="!$ctrl.isAdmin()">
+        <div class="col-xs-12 no-padding form-group">
+          <button type="button" class="btn btn-danger btn-sm" ng-click="$ctrl.showDirection()" ng-disabled="$ctrl.shown.current">Show Direction From Current Location</button>
+        </div>
+        <div class="panel panel-default col-md-6 col-xs-12 no-padding">
+          <div class="panel-heading">Get Direction From a Location</div>
+          <div class="panel-body">
+            <div class="form-group" ng-if="!$ctrl.isAdmin()">
+              <span>Start:</span>
+              <input type="text" class="form-control" ng-model="$ctrl.geo"
+                    g-places-autocomplete required autocomplete="off" options="$ctrl.autocompleteOptions" />
+            </div>
+            <div>
+              <button type="button" class="btn btn-danger btn-sm" ng-disabled="!$ctrl.selectedLoc.lat || !$ctrl.selectedLoc.lng || !$ctrl.geo || $ctrl.shown.custom" ng-click="$ctrl.showInputDirection()">Show</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-xs-12">
           <div class="pull-left form-inline no-padding">
-            <div class="form-group" ng-if="!$ctrl.isAdmin()">
-              <label>Start:</label>
-              <input type="text" class="form-control" ng-model="$ctrl.geo"
-                    g-places-autocomplete required autocomplete="off"/>
-            </div>
-            <button type="button" class="btn btn-info btn-sm" ng-disabled="!$ctrl.selectedLoc.lat || !$ctrl.selectedLoc.lng || !$ctrl.geo" ng-click="$ctrl.showInputDirection()" ng-if="!$ctrl.isAdmin()">Show Direction</button>
-            <button type="button" class="btn btn-success btn-sm" ng-click="$ctrl.showDirection()" ng-if="!$ctrl.isAdmin()">Show Direction From Current Location</button>
             <button type="button" class="btn btn-default btn-sm" ui-sref="store-list">Back</button>
           </div>
         </div>
       </div>
-
     </div>
   </div>
   <hr>

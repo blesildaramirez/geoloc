@@ -19,16 +19,17 @@
                                 'has-error': (form.address.$invalid || $ctrl.errors.geoLocation) && $ctrl.submitted }">
           <label>Address</label>
           <input type="text" name="address" class="form-control" ng-model="$ctrl.geo"
-                g-places-autocomplete required ng-change="$ctrl.invalidateAddress()" autocomplete="off"/>
+                g-places-autocomplete required ng-change="$ctrl.invalidateAddress()" autocomplete="off"
+                options="$ctrl.autocompleteOptions" />
           <p class="help-block" ng-show="(form.address.$error.required || $ctrl.errors.geoLocation) && $ctrl.submitted">
             An address is required
           </p>
           <div class="panel" ng-if="$ctrl.center">
-            <leaflet lf-center="$ctrl.center" height="280px"></leaflet>
+            <leaflet lf-center="$ctrl.center" markers="$ctrl.markers" height="280px"></leaflet>
           </div>
         </div>
         <div>
-          <button class="btn btn-inverse btn-lg" type="submit">
+          <button class="btn btn-inverse btn-lg btn-danger" type="submit">
             Save
           </button>
           <button class="btn btn-inverse btn-lg" ui-sref="store-list">

@@ -13,6 +13,13 @@ class StoreShowComponent {
     this.fetching = {};
     this.path = [];
     this.selectedLoc = {};
+    this.autocompleteOptions = {
+      componentRestrictions: { country: 'ph' }
+    };
+    this.shown = {
+      current: false,
+      custom: false
+    };
 
     this.$scope.$on('g-places-autocomplete:select',(event) => {
       this.selectedLoc.lat = event.targetScope.model.geometry.location.lat();
@@ -42,6 +49,7 @@ class StoreShowComponent {
   }
 
   showInputDirection() {
+    this.shown.custom = true;
     this.selectedParams = {
       origin: new google.maps.LatLng(this.selectedLoc.lat, this.selectedLoc.lng),
       destination: new google.maps.LatLng(this.center.lat, this.center.lng),
@@ -50,7 +58,7 @@ class StoreShowComponent {
     var directionsService = new google.maps.DirectionsService();
     directionsService.route(this.selectedParams, (response, status) => {
       if (status === 'OK') {
-        angular.forEach(response.routes, (r, i) => {
+        angular.forEach(response.routes, (r) => {
           this.path.push({
             color: '#008000',
             weight: 5,
@@ -65,6 +73,7 @@ class StoreShowComponent {
   }
 
   showDirection() {
+    this.shown.current = true;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((p) => {
         this.pathParams = {
@@ -75,7 +84,7 @@ class StoreShowComponent {
         var directionsService = new google.maps.DirectionsService();
         directionsService.route(this.pathParams, (response, status) => {
           if (status === 'OK') {
-            angular.forEach(response.routes, (r, i) => {
+            angular.forEach(response.routes, (r) => {
               this.path.push({
                 weight: 5,
                 latlngs: []
